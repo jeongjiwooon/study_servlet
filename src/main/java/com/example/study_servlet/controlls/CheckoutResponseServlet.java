@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/getRequestParamsServlet")
+@WebServlet(urlPatterns = "/CheckoutResponseServlet")
 public class CheckoutResponseServlet extends HttpServlet {
 
     @Override

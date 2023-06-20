@@ -9,43 +9,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/getRequestParamsServlet")
-public class GetRequestParamsServlet extends HttpServlet
+@WebServlet(urlPatterns = "/mynameRequestServlet")
+public class MynameRequestServlet extends HttpServlet
 {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         try
         {
-            String firstName = request.getParameter("first_name");
-            String secondName = request.getParameter("second_name");
             PrintWriter printWriter = response.getWriter();
-            // String contents = "Hello, World!";
-            String contents = "<!DOCTYPE html>\r\n" + //
-                    "<html lang=\"en\">\r\n" + //
+            String contents = "<html lang=\"en\">\r\n" + //
                     "<head>\r\n" + //
                     "    <meta charset=\"UTF-8\">\r\n" + //
                     "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n" + //
-                    "    <title> Hello world ! </title>\r\n" + //
+                    "    <title>Document</title>\r\n" + //
                     "</head>\r\n" + //
-                    "\r\n" + //
                     "<body>\r\n" + //
-                    "    <div> first Name: " + firstName + " </div>\r\n" + //
-                    "    <div> second Name: " + secondName + "</div>\r\n" + //
-                    "    \r\n" + //
+                    "    <div>input your name</div>\r\n" + //
+                    "    <form action=\"http://192.168.0.40:8080/getRequestParamsServlet\" method=\"get\">\r\n" + //
+                    "    <div>first name: <input type=\"text\" name=\"first_name\"></div>\r\n" + //
+                    "    <div>second name: <input type=\"text\" name=\"second_name\"></div>\r\n" + //
+                    "    <div><button type=\"submit\">\uBCF4\uB0B4\uAE30</button></div></form>\r\n" + //
                     "</body>\r\n" + //
                     "</html>";
             printWriter.println(contents);
             printWriter.close();
-            // PrintWriter printWriter = response.getWriter();
-            // String contents = "";
-            // printWriter.println(contents);
-            // printWriter.close();
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
-        System.out.println("종료");
     }
 }

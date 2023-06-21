@@ -38,8 +38,8 @@ public class CarInforsServlet extends HttpServlet {
                     "";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                System.out.println(resultSet.getString("CAR_NAME") + ","+ resultSet.getString("YEAR")+ ","
-                        + resultSet.getString("CAR_INFOR_ID")+ "," + resultSet.getString("COMPANY_ID"));
+                System.out.println(resultSet.getString("CAR_NAME") + "," + resultSet.getString("YEAR") + ","
+                        + resultSet.getString("CAR_INFOR_ID") + "," + resultSet.getString("COMPANY_ID"));
             }
             // SELECT * FROM factorys;
             query = "insert into car_infors\n" + //
@@ -48,10 +48,10 @@ public class CarInforsServlet extends HttpServlet {
                     "('벤츠', '2001', '" + statPK + "', 'C004'); ";
 
             int count = statement.executeUpdate(query);
-ResultSet resultSet2 = statement.executeQuery("SELECT * FROM db_cars.car_infors");
+            ResultSet resultSet2 = statement.executeQuery("SELECT * FROM db_cars.car_infors");
             while (resultSet2.next()) {
-             System.out.println(resultSet2.getString("CAR_NAME") + ","+ resultSet2.getString("YEAR")+ ","
-                        + resultSet2.getString("CAR_INFOR_ID")+ "," + resultSet2.getString("COMPANY_ID"));
+                System.out.println(resultSet2.getString("CAR_NAME") + "," + resultSet2.getString("YEAR") + ","
+                        + resultSet2.getString("CAR_INFOR_ID") + "," + resultSet2.getString("COMPANY_ID"));
             }
             // INSERT INTO factorys
             // (COMPANY_ID , COMPANY)
@@ -66,8 +66,6 @@ ResultSet resultSet2 = statement.executeQuery("SELECT * FROM db_cars.car_infors"
 
             // int count = statement.executeUpdate(query);
             System.out.println();
-
-         
 
         } catch (Exception e) { // 에러발생시 캐치함.
             // TODO: handle exception

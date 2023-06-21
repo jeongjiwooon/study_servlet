@@ -13,22 +13,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.study_servlet.commons.Common;
+
 @WebServlet(urlPatterns = "/ConnectDBServlet")
 public class ConnectDBServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            // - MySQL workbench 실행 : JDBCs
-            // - User/password와 접속 IP:port 접속
-            String url = "jdbc:mysql://192.168.0.40:3306/db_cars";
-            String user = "yojulab"; 
-            String password = "!yojulab*";
-
-            Connection connection = DriverManager.getConnection(url, user, password);
-            System.out.println("DB연결 성공\n");
             
-            //클라이언트에 html 화면 제공 
+
+            // 클라이언트에 html 화면 제공
             String contents = " <!DOCTYPE html>\r\n" + //
                     "<html lang=\"en\">\r\n" + //
                     "\r\n" + //
@@ -37,7 +32,8 @@ public class ConnectDBServlet extends HttpServlet {
                     "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n" + //
                     "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n" + //
                     "    <title>bootstrap_tables</title>\r\n" + //
-                    "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css\">\r\n" + //
+                    "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css\">\r\n"
+                    + //
                     "   \r\n" + //
                     "</head>\r\n" + //
                     "\r\n" + //
@@ -53,32 +49,33 @@ public class ConnectDBServlet extends HttpServlet {
                     "            </thead>\r\n" + //
                     "            <tbody>\r\n";
 
-
             // - query Edit
-            Statement statement = connection.createStatement();
+            Common common =new Common();
+            Statement statement = common.getStatement();
             String query = "SELECT * FROM factorys";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                System.out.println( );
-        contents =contents+ " <tr>\r\n" + //
-                    "                    <td>"+resultSet.getString("COMPANY_ID")+"</td>\r\n" + //
-                    "                    <td>"+ resultSet.getString("COMPANY")+"</td>\r\n" + //
-                    "                 \r\n" + //
-                    "                </tr>\r\n" ;
+                System.out.println();
+                contents = contents + " <tr>\r\n" + //
+                        "                    <td>" + resultSet.getString("COMPANY_ID") + "</td>\r\n" + //
+                        "                    <td>" + resultSet.getString("COMPANY") + "</td>\r\n" + //
+                        "                 \r\n" + //
+                        "                </tr>\r\n";
             }
 
- contents =contents + "            </tbody>\r\n" + //
+            contents = contents + "            </tbody>\r\n" + //
                     "        </table>\r\n" + //
                     "    </div>\r\n" + //
                     "\r\n" + //
                     "</body>\r\n" + //
-                    "<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js\"></script>\r\n" + //
+                    "<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js\"></script>\r\n"
+                    + //
                     "\r\n" + //
                     "</html>";
-            //클라이언트에 html 화면 제공 
+            // 클라이언트에 html 화면 제공
             resp.setContentType("text/html;charset=UTF-8");
-            
-          PrintWriter printWriter = resp.getWriter();
+            PrintWriter printWriter = resp.getWriter();
+
             printWriter.println(contents);
             printWriter.close();
 

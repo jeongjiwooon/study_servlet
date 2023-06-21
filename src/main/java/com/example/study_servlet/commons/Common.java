@@ -6,14 +6,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+<<<<<<< HEAD
 import java.util.UUID;
+=======
+
+>>>>>>> 5b9fc090052ed920ebce6e05c28b0f262b41b098
 
 public class Common {
     // 1-1 ※ UUID 특정 키를 생성한다는 말.
 
-    public static String generateUUID() {
-        return UUID.randomUUID().toString();
-        
+    public Statement getStatement(){
+        String url = "jdbc:mysql://192.168.0.42:3306/db_cars";
+        String user = "yojulab";
+        String password = "!yojulab*";
+
+        Statement statement = null;
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
+    }
+// DATE로 ID생성 . 
+    public String getGeneratorID(){
+        Date date = new Date();  
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyyhh:mm:ss");  
+        String strDate = formatter.format(date);
+        return strDate;
     }
     public Statement getStatement(){
         String url = "jdbc:mysql://192.168.0.40:3306/db_cars";

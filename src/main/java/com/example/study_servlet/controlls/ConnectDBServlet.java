@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/connectDBServlet")
-public class ConnectDBServlet extends HttpServlet
-{
+@WebServlet(urlPatterns = "/ConnectDBServlet")
+public class ConnectDBServlet extends HttpServlet{
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        try
-        {
-            String url = "jdbc:mysql://192.168.0.42:3306/db_cars";
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+         try {
+            // - MySQL workbench 실행 : JDBCs
+            // - User/password와 접속 IP:port 접속
+            String url = "jdbc:mysql://192.168.0.40:3306/db_cars";
             String user = "yojulab";
             String password = "!yojulab*";
 
@@ -31,8 +31,7 @@ public class ConnectDBServlet extends HttpServlet
             Statement statement = connection.createStatement();
             String query = "SELECT * FROM factorys";
             ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 System.out.println(resultSet.getString("COMPANY_ID") + resultSet.getString("COMPANY"));
             }
             //SELECT COUNT(*) AS CNT FROM factorys;
@@ -41,8 +40,7 @@ public class ConnectDBServlet extends HttpServlet
             resultSet = statement.executeQuery(query);
             int totalCount = 0 ; 
 
-            while (resultSet.next())
-            {
+             while (resultSet.next()) {
                 System.out.println( resultSet.getInt("CNT"));
                 totalCount = resultSet.getInt("CNT");
             }
@@ -50,19 +48,20 @@ public class ConnectDBServlet extends HttpServlet
             // (COMPANY_ID , COMPANY)
             // VALUE
             // ('CAR-01' , 'AUDI'); 
-            String companyId = "CAR-01"; 
-            String company = "AUDI";
-            query = "INSERT INTO factorys " + 
-                    "(COMPANY_ID , COMPANY) " + 
-                    " VALUE " + 
-                    "('" + companyId + "', '" + company + "')"; 
-            int count =  statement.executeUpdate(query);
+            // String companyId = "CAR- 01";               //companyId 변수설정 
+            // String company = "AUDI";                    //company 변수설정 
+            // query = "INSERT INTO factorys " +           // 스페이스 찍어줌. 
+            //         "(COMPANY_ID , COMPANY) " +         //COMPANY_ID , COMPANY 를 위에 변수로 설정 
+            //         " VALUE " + 
+            //         "('"+companyId+"', '"+company+"') "; //쿼리안에 ' " +변수로 넣어준 상태에서 진행. 
+           
+           
+            // int count =  statement.executeUpdate(query);
             System.out.println();
+        } catch (Exception e) {      //에러발생시 캐치함. 
+            // TODO: handle exception
+              System.out.println(e.getMessage());
         }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        System.out.println();
-    }
+         System.out.println();
+  }    
 }

@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.study_servlet.commons.Common;
+// import com.example.study_servlet.daos.FactorysDao;
+import com.example.study_servlet.daos.CarInforsDao;
 
 @WebServlet(urlPatterns = "/ConnectDBServlet")
 public class ConnectDBServlet extends HttpServlet {
@@ -21,9 +25,10 @@ public class ConnectDBServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            
-
             // 클라이언트에 html 화면 제공
+            resp.setContentType("text/html;charset=UTF-8");
+            PrintWriter printWriter = resp.getWriter();
+
             String contents = " <!DOCTYPE html>\r\n" + //
                     "<html lang=\"en\">\r\n" + //
                     "\r\n" + //
@@ -50,20 +55,22 @@ public class ConnectDBServlet extends HttpServlet {
                     "            <tbody>\r\n";
 
             // - query Edit
-            Common common =new Common();
-            Statement statement = common.getStatement();
-            String query = "SELECT * FROM factorys";
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                System.out.println();
-                contents = contents + " <tr>\r\n" + //
-                        "                    <td>" + resultSet.getString("COMPANY_ID") + "</td>\r\n" + //
-                        "                    <td>" + resultSet.getString("COMPANY") + "</td>\r\n" + //
+            // FactorysDao factorysDao = new FactorysDao();
+            CarInforsDao carinforDao = new CarInforsDao();
+
+
+            // ArrayList<HashMap<String, String>> factoryList = factorysDao.selectAll();
+            ArrayList<HashMap<String, String>>  CarInforList =  carinforDao.selectAll();
+            for (int i = 0; i < CarInforList.size(); i = i + 1) {
+                HashMap<String, String> hashMap = CarInforList.get(i);
+                contents += " <tr>\r\n" + //
+                        "                    <td>" + hashMap.get("COMPANY_ID") + "</td>\r\n" + //
+                        "                    <td>" + hashMap.get("COMPANY") + "</td>\r\n" + //
                         "                 \r\n" + //
                         "                </tr>\r\n";
             }
 
-            contents = contents + "            </tbody>\r\n" + //
+            contents += "            </tbody>\r\n" + //
                     "        </table>\r\n" + //
                     "    </div>\r\n" + //
                     "\r\n" + //
@@ -72,39 +79,11 @@ public class ConnectDBServlet extends HttpServlet {
                     + //
                     "\r\n" + //
                     "</html>";
-            // 클라이언트에 html 화면 제공
-            resp.setContentType("text/html;charset=UTF-8");
-            PrintWriter printWriter = resp.getWriter();
 
             printWriter.println(contents);
             printWriter.close();
-
-            // SELECT COUNT(*) AS CNT FROM factorys;
-            query = "SELECT COUNT(*) AS CNT FROM factorys ";
-            resultSet = statement.executeQuery(query);
-            int totalCount = 0;
-
-            while (resultSet.next()) {
-                System.out.println(resultSet.getInt("CNT"));
-                totalCount = resultSet.getInt("CNT");
-            }
-            // INSERT INTO factorys
-            // (COMPANY_ID , COMPANY)
-            // VALUE
-            // ('CAR-01' , 'AUDI');
-            // String companyId = "CAR- 01"; //companyId 변수설정
-            // String company = "AUDI"; //company 변수설정
-            // query = "INSERT INTO factorys " + // 스페이스 찍어줌.
-            // "(COMPANY_ID , COMPANY) " + //COMPANY_ID , COMPANY 를 위에 변수로 설정
-            // " VALUE " +
-            // "('"+companyId+"', '"+company+"') "; //쿼리안에 ' " +변수로 넣어준 상태에서 진행.
-
-            // int count = statement.executeUpdate(query);
-            System.out.println();
-        } catch (Exception e) { // 에러발생시 캐치함.
-            // TODO: handle exception
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println();
     }
 }

@@ -20,14 +20,12 @@ public class OptionInforsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
             Common commons = new Common();
+
             Statement statement = commons.getStatement(); // Editor in Workbench
             String query = "SELECT *\n" + //
                     "FROM option_infors; ";
             ResultSet resultSet = statement.executeQuery(query);
-            while(resultSet.next()){
-                System.out.println(resultSet.getString("OPTION_INFOR_ID")+ " , "+ resultSet.getString("OPTION_NAME"));
-            }
-
+           
             String contents = "<!DOCTYPE html>  \r\n" + //
                     "<html lang=\"en\">\r\n" + //
                     "<head>\r\n" + //
@@ -46,12 +44,16 @@ public class OptionInforsServlet extends HttpServlet {
                     "                    <th>OPTION_NAME</th>\r\n" + //
                     "                </tr>\r\n" + //
                     "            </thead>\r\n" + //
-                    "            <tbody>\r\n" + //
-                    "                <tr>\r\n" + //
-                    "                    <td>OI001</td>\r\n" + //
-                    "                    <td>\uB124\uBE44\uAC8C\uC774\uC158</td>\r\n" + //
-                    "                </tr>\r\n" + //
-                    "            </tbody>\r\n" + //
+                    "            <tbody>\r\n"  ;
+  while(resultSet.next()){
+              
+           
+                   contents = contents +  "                <tr>\r\n" + //
+                    "                    <td>"+resultSet.getString("OPTION_INFOR_ID")+"</td>\r\n" + //
+                    "                    <td>"+resultSet.getString("OPTION_NAME")+"</td>\r\n" + //
+                    "                </tr>\r\n";
+                     }
+                  contents = contents +   "            </tbody>\r\n" + //
                     "        </table>\r\n" + //
                     "    </div>\r\n" + //
                     "\r\n" + //

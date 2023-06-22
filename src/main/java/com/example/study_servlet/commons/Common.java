@@ -12,7 +12,7 @@ public class Common {
     // 1-1 ※ UUID 특정 키를 생성한다는 말.
 
     public Statement getStatement(){
-        String url = "jdbc:mysql://192.168.0.42:3306/db_cars";
+        String url = "jdbc:mysql://192.168.0.40:3306/db_cars";
         String user = "yojulab";
         String password = "!yojulab*";
 

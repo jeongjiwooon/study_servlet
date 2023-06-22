@@ -6,11 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-<<<<<<< HEAD
 import java.util.UUID;
-=======
-
->>>>>>> 5b9fc090052ed920ebce6e05c28b0f262b41b098
 
 public class Common {
     // 1-1 ※ UUID 특정 키를 생성한다는 말.

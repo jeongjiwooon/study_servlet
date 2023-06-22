@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,19 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.study_servlet.commons.Common;
+import com.example.study_servlet.daos.OptionInforsDao;
 
 @WebServlet(urlPatterns = "/optionInforsServlet")
 public class OptionInforsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Common commons = new Common();
 
-            Statement statement = commons.getStatement(); // Editor in Workbench
             String query = "SELECT *\n" + //
                     "FROM option_infors; ";
-            ResultSet resultSet = statement.executeQuery(query);
-           
+
             String contents = "<!DOCTYPE html>  \r\n" + //
                     "<html lang=\"en\">\r\n" + //
                     "<head>\r\n" + //
@@ -44,16 +44,20 @@ public class OptionInforsServlet extends HttpServlet {
                     "                    <th>OPTION_NAME</th>\r\n" + //
                     "                </tr>\r\n" + //
                     "            </thead>\r\n" + //
-                    "            <tbody>\r\n"  ;
-  while(resultSet.next()){
-              
-           
-                   contents = contents +  "                <tr>\r\n" + //
-                    "                    <td>"+resultSet.getString("OPTION_INFOR_ID")+"</td>\r\n" + //
-                    "                    <td>"+resultSet.getString("OPTION_NAME")+"</td>\r\n" + //
-                    "                </tr>\r\n";
-                     }
-                  contents = contents +   "            </tbody>\r\n" + //
+                    "            <tbody>\r\n";
+            OptionInforsDao optionInforsDao = new OptionInforsDao();
+            ArrayList optionInforList = new ArrayList<>();
+            optionInforList = optionInforsDao.SelectWithSearch("");
+
+            for (int i = 0; i < optionInforList.size(); i = i + 1) {
+                HashMap optionInforRecord = new HashMap<>();
+                optionInforRecord = (HashMap) optionInforList.get(i);
+                contents = contents + "                <tr>\r\n" + //
+                        "                    <td>" + optionInforRecord.get("OPTION_INFOR_ID") + "</td>\r\n" + //
+                        "                    <td>" + optionInforRecord.get("OPTION_NAME") + "</td>\r\n" + //
+                        "                </tr>\r\n";
+            }
+            contents = contents + "            </tbody>\r\n" + //
                     "        </table>\r\n" + //
                     "    </div>\r\n" + //
                     "\r\n" + //

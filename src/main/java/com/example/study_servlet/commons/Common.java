@@ -32,27 +32,9 @@ public class Common {
         String strDate = formatter.format(date);
         return strDate;
     }
-    public Statement getStatement(){
-        String url = "jdbc:mysql://192.168.0.40:3306/db_cars";
-        String user = "yojulab";
-        String password = "!yojulab*";
 
-        Statement statement = null;
-        try {
-            Connection connection = DriverManager.getConnection(url, user, password);
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return statement;
+        public String generateUUID() {
+         return UUID.randomUUID().toString();
+
     }
-
-    public String getGeneratorID(){
-        Date date = new Date();  
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyyhh:mm:ss");  
-        String strDate = formatter.format(date);
-        return strDate;
-    }
-
-
 }

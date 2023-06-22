@@ -9,9 +9,12 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Common {
-    // 1-1 ※ UUID 특정 키를 생성한다는 말.
+    public String Common() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid;
+    }
 
-    public Statement getStatement(){
+    public Statement getStatement() {
         String url = "jdbc:mysql://192.168.0.42:3306/db_cars";
         String user = "yojulab";
         String password = "!yojulab*";
@@ -25,16 +28,11 @@ public class Common {
         }
         return statement;
     }
-// DATE로 ID생성 . 
-    public String getGeneratorID(){
-        Date date = new Date();  
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyyhh:mm:ss");  
+
+    public String getGeneratorID() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyyhh:mm:ss");
         String strDate = formatter.format(date);
         return strDate;
-    }
-
-        public String generateUUID() {
-         return UUID.randomUUID().toString();
-
     }
 }

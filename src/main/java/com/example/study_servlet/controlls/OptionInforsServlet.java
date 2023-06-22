@@ -10,23 +10,20 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-//화면이 http에서 url 패턴으로 들어온 것을 webservlet으로 표시 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.study_servlet.commons.Common;
 import com.example.study_servlet.daos.OptionInforsDao;
 
 @WebServlet(urlPatterns = "/optionInforsServlet")
 public class OptionInforsServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
+            String search = request.getParameter("search");
 
-            String query = "SELECT *\n" + //
-                    "FROM option_infors; ";
-
-            String contents = "<!DOCTYPE html>  \r\n" + //
+            String contents = "<!DOCTYPE html>\r\n" + //
                     "<html lang=\"en\">\r\n" + //
                     "<head>\r\n" + //
                     "    <meta charset=\"UTF-8\">\r\n" + //
@@ -36,6 +33,13 @@ public class OptionInforsServlet extends HttpServlet {
                     "    <title>Document</title>\r\n" + //
                     "</head>\r\n" + //
                     "<body>\r\n" + //
+                    "    <div class=\"container\">\r\n" + //
+                    "        <form action=\"/optionInforsServlet\">\r\n" + //
+                    "            <label for=\"\">\uAC80\uC0C9</label>\r\n" + //
+                    "            <input type=\"text\" name=\"search\" value='"+search+"'>\r\n" + //
+                    "            <button>\uAC80\uC0C9 \uD558\uAE30</button>\r\n" + //
+                    "        </form>\r\n" + //
+                    "    </div>\r\n" + //
                     "    <div class=\"container\">\r\n" + //
                     "        <table class=\"table table-bordered table-hover\">\r\n" + //
                     "            <thead>\r\n" + //
@@ -47,14 +51,14 @@ public class OptionInforsServlet extends HttpServlet {
                     "            <tbody>\r\n";
             OptionInforsDao optionInforsDao = new OptionInforsDao();
             ArrayList optionInforList = new ArrayList<>();
-            optionInforList = optionInforsDao.SelectWithSearch("");
+            optionInforList = optionInforsDao.SelectWithSearch(search);
 
-            for (int i = 0; i < optionInforList.size(); i = i + 1) {
+            for(int i=0; i< optionInforList.size(); i=i+1) {
                 HashMap optionInforRecord = new HashMap<>();
                 optionInforRecord = (HashMap) optionInforList.get(i);
                 contents = contents + "                <tr>\r\n" + //
-                        "                    <td>" + optionInforRecord.get("OPTION_INFOR_ID") + "</td>\r\n" + //
-                        "                    <td>" + optionInforRecord.get("OPTION_NAME") + "</td>\r\n" + //
+                        "                    <td>"+optionInforRecord.get("OPTION_INFOR_ID")+"</td>\r\n" + //
+                        "                    <td>"+optionInforRecord.get("OPTION_NAME")+"</td>\r\n" + //
                         "                </tr>\r\n";
             }
             contents = contents + "            </tbody>\r\n" + //
@@ -64,8 +68,9 @@ public class OptionInforsServlet extends HttpServlet {
                     "</body>\r\n" + //
                     "<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js\"></script>\r\n"
                     + //
+                    "\r\n" + //
                     "</html>";
-            // getWriter전에 charset 하기
+            // getWriter 전에 charset 하기
             response.setContentType("text/html;charset=UTF-8");
 
             PrintWriter printWriter = response.getWriter();

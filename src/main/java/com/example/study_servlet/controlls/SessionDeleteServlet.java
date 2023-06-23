@@ -5,30 +5,25 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/cookies/CreateServlet")
-public class CookiesCreateServlet extends HttpServlet
+@WebServlet(urlPatterns = "/session/DeleteServlet")
+public class SessionDeleteServlet extends HttpServlet
 {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         try
         {
-            // cookies
-            Cookie cookie_first = new Cookie("firstName", "jeong!");
-            Cookie cookie_second = new Cookie("secondName", "jiwoon!");
+            HttpSession httpSession = request.getSession();
+            httpSession.invalidate();
 
-            response.addCookie(cookie_first);
-            response.addCookie(cookie_second);
-
-            // display
             PrintWriter printWriter = response.getWriter();
-            String content = "<div>CreateCookieServlets</div>";
-            printWriter.println(content);
+            String contents = "<div>Logout</div>";
+            printWriter.println(contents);
             printWriter.close();
         }
         catch (Exception e)

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 package com.example.study_servlet.daos;
-=======
-package com.example.study_servlets.daos;
->>>>>>> 6b2d51295e1ce4c724a5b06de883f570fa6c2dc3
 
 import java.sql.ResultSet;
 import java.sql.Statement;

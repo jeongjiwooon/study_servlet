@@ -29,18 +29,18 @@ public class OptionInforsDao
 
             public int InsertWithUniqueID(String frontgear)
             {
-                int count = 0;
+                int count = 0; // return 값을 넣기 위해 try catch문 밖에 변수 생성
                 try
                 {
-                    Common common = new Common();
-                    Statement statement = common.getStatement();
-                    String uuid = common.generateUUID();
-                    frontgear = "전진기어";
+                    Common common = new Common(); // 랜덤 UUID를 생성하기 위해 Common 호출
+                    Statement statement = common.getStatement(); // Common에 SQL 구문을 처리하기 위해 statement 명령어 사용
+                    String uuid = common.generateUUID(); // 랜덤 UUID를 담는 변수 생성 (generateUUID: 랜덤 ID 생성 메서드)
+                    frontgear = "전진기어"; // Quest: 전진기어 생성이므로 변수에 전진기어 값 입력
                     String query = "insert into option_infors\n" + //
                             "(option_infor_id, option_name)\n" + //
                             "values\n" + //
-                            "('" + uuid +" ', '" + frontgear + "');";
-                    count = statement.executeUpdate(query);
+                            "('" + uuid +" ', '" + frontgear + "');"; // query문 작성: insert option_infor_id에 uuid(랜덤아이디), option_name에 frontgear(전진기어) 입력
+                    count = statement.executeUpdate(query); // count에 query 명령어 횟수 입력
                 }
                 catch (Exception e)
                 {
@@ -56,12 +56,12 @@ public class OptionInforsDao
         {
             Common common = new Common();
             Statement statement = common.getStatement();
-            name = "회전기어";
+            name = "회전기어"; // Quest 회전기어, OI001의 값 Update로 변환
             unqiue_id = "OI001";
-            String query = "update option_infors\n" + //
+            String query = "update option_infors\n" + // DB의 Update문
                     "set option_name = '" + name + "'\n" + //
                     "where option_infor_id = '" + unqiue_id + "'";
-            count = statement.executeUpdate(query);
+            count = statement.executeUpdate(query); // 위와 동일
         }
         catch (Exception e)
         {

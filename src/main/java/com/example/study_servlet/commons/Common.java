@@ -35,4 +35,8 @@ public class Common {
         String strDate = formatter.format(date);
         return strDate;
     }
+
+    public String generateUUID() {
+        return null;
+    }
 }

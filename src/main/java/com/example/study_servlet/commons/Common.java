@@ -37,6 +37,7 @@ public class Common {
     }
 
     public String generateUUID() {
-        return null;
+        String uuid = UUID.randomUUID().toString();
+        return uuid;
     }
 }

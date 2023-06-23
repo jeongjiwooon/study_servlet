@@ -35,6 +35,7 @@ public class OptionInforsDao
                     Common common = new Common();
                     Statement statement = common.getStatement();
                     String uuid = common.generateUUID();
+                    frontgear = "전진기어";
                     String query = "insert into option_infors\n" + //
                             "(option_infor_id, option_name)\n" + //
                             "values\n" + //
@@ -55,6 +56,8 @@ public class OptionInforsDao
         {
             Common common = new Common();
             Statement statement = common.getStatement();
+            name = "회전기어";
+            unqiue_id = "OI001";
             String query = "update option_infors\n" + //
                     "set option_name = '" + name + "'\n" + //
                     "where option_infor_id = '" + unqiue_id + "'";

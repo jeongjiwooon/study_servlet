@@ -1,4 +1,3 @@
-package com.example.study_servlet.controlls;
 
 import java.io.IOException;
 import java.io.PrintWriter;

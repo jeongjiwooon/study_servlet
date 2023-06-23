@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 import com.example.study_servlet.commons.Common;
 

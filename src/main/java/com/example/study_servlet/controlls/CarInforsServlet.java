@@ -22,7 +22,7 @@ public class CarInforsServlet extends HttpServlet {
         try {
             // - MySQL workbench 실행 : JDBCs
             // - User/password와 접속 IP:port 접속
-            String url = "jdbc:mysql://192.168.0.40:3306/db_cars";
+            String url = "jdbc:mysql://192.168.0.42:3306/db_cars";
             String user = "yojulab";
             String password = "!yojulab*";
 

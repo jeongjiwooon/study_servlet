@@ -1,5 +1,7 @@
 package com.example.study_servlet.daos;
 
+import java.sql.Connection;
+import java.sql.DriverManager ;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class CarInforsDao
         {
         Common commons = new Common();
         Statement statement = commons.getStatement();
+
         String query = "SELECT * FROM car_infors";
         ResultSet resultSet = statement.executeQuery(query);
         HashMap hashMap = new HashMap();

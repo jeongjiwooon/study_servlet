@@ -15,27 +15,18 @@ public class HelloWorldServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         System.out.println("HelloWorldServlet - doGet()");
-        try {
-            String firstName = "jeong";
-            String secondName = "jiwoon" ;
+        try
+        {
+            response.setContentType("text/html;charset=UTF-8");
             PrintWriter printWriter = response.getWriter();
-            String contents = "<!DOCTYPE html>\r\n" + //
-                    "<html lang=\"en\">\r\n" + //
-                    "<head>\r\n" + //
-                    "    <meta charset=\"UTF-8\">\r\n" + //
-                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n" + //
-                    "    <title>Hello World !</title>\r\n" + //
-                    "</head>\r\n" + //
-                    "<body>\r\n" + //
-                    "    <div> first Name : "+firstName+ " </div>\r\n" + //
-                    "    <div> second Name : "+secondName+" </div>\r\n" + //
-                    "</body>\r\n" + //
-                    "</html>";
+            String contents = "jeongjiwoon";
             printWriter.println(contents);
             printWriter.close();
-        } catch (Exception e) {
+        }
+
+        catch (Exception e)
+        {
             System.out.println(e.getMessage());
         }
-        System.out.println("HelloWorldServlet - doGet() done.");
     }
 }

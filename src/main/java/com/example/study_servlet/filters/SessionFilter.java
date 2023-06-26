@@ -11,7 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 // @WebFilter(urlPatterns = "/*")
-public class SessionFilter implements Filter {
+public class SessionFilter implements Filter
+{
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -20,6 +21,7 @@ public class SessionFilter implements Filter {
             System.out.println(request.getRemoteHost());
             System.out.println(request.getRemoteAddr());
 
+          
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/helloWorldServlet");
             requestDispatcher.forward(request, response);
 

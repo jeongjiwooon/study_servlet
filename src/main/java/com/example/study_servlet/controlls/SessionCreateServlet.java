@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 // /session/CreateServlet?username=yojulab&password=1234
-@WebServlet(urlPatterns = "/session/CreateServlet")
+// @WebServlet(urlPatterns = "/session/CreateServlet")
 public class SessionCreateServlet extends HttpServlet
 {
     @Override

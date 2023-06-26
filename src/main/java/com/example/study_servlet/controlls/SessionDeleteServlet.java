@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/session/DeleteServlet")
+// @WebServlet(urlPatterns = "/session/DeleteServlet")
 public class SessionDeleteServlet extends HttpServlet
 {
     @Override

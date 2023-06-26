@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = "/helloWorldServlet")
 public class HelloWorldServlet extends HttpServlet
 {
+     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        System.out.println("HelloWorldServlet - doGet()");
+    {   System.out.println("HelloWorldServlet - doGet()");
+      
         try
         {
             response.setContentType("text/html;charset=UTF-8");
@@ -26,7 +27,7 @@ public class HelloWorldServlet extends HttpServlet
 
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("HelloWorldServlet - doGet() done.");
         }
     }
 }

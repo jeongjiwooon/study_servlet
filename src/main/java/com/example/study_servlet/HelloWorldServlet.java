@@ -27,7 +27,7 @@ public class HelloWorldServlet extends HttpServlet
 
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("HelloWorldServlet - doGet() done.");
         }
     }
 }

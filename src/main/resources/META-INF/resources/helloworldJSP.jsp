@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%  System.out.println ("HelloWorldServlet - doGet()"); %>
+<%  System.out.println ("HelloWorldJSP - doGet()"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,13 @@
     <title>Document</title>
 </head>
 <body>
-    jeongjiwoon !
+    <%  String contents = (String)request.getAttribute("contents"); %>
+    <div>
+        HTML Value :  jeongjiwoon !
+    </div>
+    <div>
+        code value : <%= contents %>
+    </div>
 </body>
 </html>
-<% System.out.println("HelloWorldServlet - doGet() done."); %>
+<% System.out.println("HelloWorldJSP - doGet() done."); %>

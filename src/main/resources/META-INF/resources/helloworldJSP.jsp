@@ -7,6 +7,18 @@
     <title>Document</title>
 </head>
 <body>
+    <% String usernameSession = (String)session.getAttribute("username"); %>
+    <div>
+        User name : <%= usernameSession %>
+    </div>
+    <div>
+        Login Status : 
+        <% if(usernameSession == null) { %>
+            <button type="submit" formaction="/session/CreateServlet?username=yojulab&password=1234" method ="get">Login</button>
+        <% } else { %>
+            Logout
+        <% } %>
+    </div>
     <% String contents = (String)request.getAttribute("contents"); %>
     <div>
         HTML value : Yoju lab !

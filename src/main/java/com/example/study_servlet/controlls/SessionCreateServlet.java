@@ -28,9 +28,9 @@ public class SessionCreateServlet extends HttpServlet
             printWriter.println("<div>Create Session Servlets</div>");
             // login 
             HttpSession httpSession = request.getSession(false);
-            if (httpSession != null) // JSESSION 있음. - 로그인 되었다는 표시
+            String usernameSession = (String) httpSession.getAttribute("username");
+            if (httpSession != null && usernameSession != null) // JSESSION 있음. - 로그인 되었다는 표시
             {
-                String usernameSession = (String) httpSession.getAttribute("username");
                 printWriter.println("<div>username: " + usernameSession + "</div>");
                 // String passwordSession = (String) httpSession.getAttribute("password");
                 // printWriter.println("<div>password: " + passwordSession + "</div>");

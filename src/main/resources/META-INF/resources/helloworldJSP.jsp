@@ -1,5 +1,6 @@
-<% System.out.println("HelloworldJSP - doGet()"); %>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <% System.out.println("HelloWorldJSP - doGet()"); %>
+        <!DOCTYPE html>
         <html lang="en">
 
         <head>
@@ -9,24 +10,29 @@
         </head>
 
         <body>
-            <% String usernameSession=(String) session.getAttribute("username"); %>
+            <% String uernameSession=(String) session.getAttribute("username"); %>
                 <div>
-                    User name : <%=usernameSession % </div>
-                        <div>Login Status :
-                            <% if(usernameSession == null) { %>
-                              <button type = "submit"formaction="/session/CreateServlet?username=yojulab&password=1234" method = "get">Login</button>  
-                                <% } else { %>
-                                    Logout
-                                    <% } %>
-                        </div>
-                        <% String contents=(String)request.getAttribute("contents"); %>
-                            <div>
-                                HTML value : Yoju lab !
-                            </div>
-                            <div>
-                                Code value : <%= contents %>
-                            </div>
+                    User Name : <%= uernameSession %>
+                </div>
+                <div>
+                    Login Status :
+                    <form action="">
+                        <% if(usernameSession == null) { %>
+                            <button type="submit" formaction="/session/CreateServlet?username=yojulab&password=1234">Login</button> 
+                        <% } else { %>
+                            <button type="submit" formaction="/session/DeleteServlet">Logout</button>
+                        <% } %>
+                        </form>
+                </div>
+                <% String contents=(String)request.getAttribute("contents"); %>
+                    <div>
+                        HTML Value : Yoju Lab !
+                    </div>
+                    <DIV>
+                        Code Value : <%= contents%>
+                    </DIV>
+
         </body>
 
         </html>
-        <% System.out.println("HelloworldJSP - doGet() done."); %>
+        <% System.out.println("HelloWorldJSP - doGet() done."); %>

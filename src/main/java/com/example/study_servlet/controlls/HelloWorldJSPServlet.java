@@ -12,19 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-// /helloWorldJSPServlet?company=jeongjiwoon
+// /helloWorldJSPServlet?company="YoJuLab"
+// /helloWorldJSPServlet?company=YoJuLab
+// /session/CreateServlet?username=yojulab&password=1234
 @WebServlet(urlPatterns = "/helloWorldJSPServlet")
 public class HelloWorldJSPServlet extends HttpServlet
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         try
-        {   //String contents = "jeongjiwoon";
-           String contents =  request.getParameter("company");
-           request.setAttribute("contents", contents);
+        {
+            // String contents = "jeongjiwoon";
+            String contents = request.getParameter("company");
+
+            request.setAttribute("contents", contents);
             // 다음 파일 호출
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/helloworldJSP.jsp");
-            requestDispatcher.forward(request, response);
+                requestDispatcher.forward(request, response);
         }
 
         catch (Exception e)

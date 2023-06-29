@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.example.study_servlet.daos.PollsDao;
 
-@WebServlet(urlPatterns = "/poll/SurveyServelt")
+@WebServlet(urlPatterns = "/poll/SurveyServlet")
 public class PollSurveyServlet extends HttpServlet
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

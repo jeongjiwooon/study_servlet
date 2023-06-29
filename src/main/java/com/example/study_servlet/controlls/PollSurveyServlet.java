@@ -31,11 +31,13 @@ public class PollSurveyServlet extends HttpServlet
                 HashMap survey = (HashMap) surveyList.get(i);
                 String questions = (String) survey.get("questions");
                 System.out.println(questions);
+                int num = 1;
                 for (int c = 0; c < third; c++)
                 {
                     HashMap survey2 = (HashMap) surveyList.get(c);
                     String choice = (String) survey2.get("choice");
-                    System.out.print(choice + " ");
+                    System.out.print("(" + num + ")" + choice + " ");
+                    num++;
                 }
                 System.out.println();
             }

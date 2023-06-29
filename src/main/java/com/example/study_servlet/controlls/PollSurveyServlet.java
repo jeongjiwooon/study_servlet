@@ -25,23 +25,28 @@ public class PollSurveyServlet extends HttpServlet
 
             PollsDao pollsDao = new PollsDao();
             ArrayList surveyList = pollsDao.SelectWithSearch(contents);
-            int third = 3;
-            for (int i = 0; i < surveyList.size(); i = i + third)
+
+            String compare = "";
+            for (int i = 0; i < surveyList.size(); i++)
             {
                 HashMap survey = (HashMap) surveyList.get(i);
                 String questions = (String) survey.get("questions");
-                System.out.println(questions);
-                int num = 1;
-                for (int c = 0; c < third; c++)
+                String questionsId = (String) survey.get("questions_id");
+                String choice = (String) survey.get("choice");
+                if (!compare.equals(questionsId))
                 {
-                    HashMap survey2 = (HashMap) surveyList.get(c);
-                    String choice = (String) survey2.get("choice");
-                    System.out.print("(" + num + ")" + choice + " ");
-                    num++;
+                    System.out.println(questions);
+                    System.out.println(choice);
+                    compare = questionsId;
                 }
-                System.out.println();
+
+                else
+                {
+                    System.out.println(choice);
+                }
             }
             request.setAttribute("contents", contents);
+            request.setAttribute("surveyList", surveyList);
             // 다음 파일 호출
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/surveys/survey.jsp");
             requestDispatcher.forward(request, response);

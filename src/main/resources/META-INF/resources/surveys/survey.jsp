@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.HashMap, java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,50 +20,37 @@
         </div>
     </div>
     <br>
-    <form method="get" action="survey.html"> 
+    <form method="get" action="/poll/SurveyDone"> 
     
     <div class=" container mx-auto">
-        <div>
-        <p> 1. 이 수업에 대해 전반적으로 만족하십니까?</p>
-        <label><input type="radio" name="1번 문항" value="1"> 매우 그렇다 </label> <br>
-        <label><input type="radio" name="1번 문항" value="2"> 그렇다 </label><br>
-        <label><input type="radio" name="1번 문항" value="3"> 보통이다 </label><br>
-        <label><input type="radio" name="1번 문항" value="4"> 그렇지 않다 </label><br>
-        <label><input type="radio" name="1번 문항" value="5"> 전혀 그렇지 않다 </label>
-        </div>
-        <br>
-        <div>
-            <p> 2. 강의계획서에 수업내용 및 목표와 평가방법이 자세하게 안내되었습니까?</p>
-            <label><input type="radio" name="2번 문항" value="1"> 매우 그렇다 </label> <br>
-            <label><input type="radio" name="2번 문항" value="2"> 그렇다 </label><br>
-            <label><input type="radio" name="2번 문항" value="3"> 보통이다 </label><br>
-            <label><input type="radio" name="2번 문항" value="4"> 그렇지 않다 </label><br>
-            <label><input type="radio" name="2번 문항" value="5"> 전혀 그렇지 않다 </label>
-        </div>
-        <br>
-        <div>
-            <p> 3. 개강 초 수업에 대한 안내 혹은 오리엔테이션에 충실히 이루어졌습니까?</p>
-            <label><input type="radio" name="3번 문항" value="1"> 매우 그렇다 </label> <br>
-            <label><input type="radio" name="3번 문항" value="2"> 그렇다 </label><br>
-            <label><input type="radio" name="3번 문항" value="3"> 보통이다 </label><br>
-            <label><input type="radio" name="3번 문항" value="4"> 그렇지 않다 </label><br>
-            <label><input type="radio" name="3번 문항" value="5"> 전혀 그렇지 않다 </label>
-        </div>
-        <br>
-        <div>
-            <p> 4. 대학원 학습 환경과 자료 제공은 만족스러웠나요?</p>
-            <label><input type="radio" name="4번 문항" value="1"> 매우 그렇다 </label> <br>
-            <label><input type="radio" name="4번 문항" value="2"> 그렇다 </label><br>
-            <label><input type="radio" name="4번 문항" value="3"> 보통이다 </label><br>
-            <label><input type="radio" name="4번 문항" value="4"> 그렇지 않다 </label><br>
-            <label><input type="radio" name="4번 문항" value="5"> 전혀 그렇지 않다 </label>
-        </div>
+        <%
+        ArrayList surveyList=(ArrayList)request.getAttribute("surveyList");
+        String compare = "";
+        for (int i = 0; i < surveyList.size(); i++) {
+            HashMap survey = (HashMap) surveyList.get(i);
+            String questions = (String) survey.get("questions");
+            String questionsId = (String) survey.get("questions_id");
+            String choice = (String) survey.get("choice");
+            String choice_id = (String) survey.get("choice_id");
+            if (!compare.equals(questionsId)) {
+        %>
+                <p> <%= questions %></p>
+                <label><input type="radio" name="<%= questionsId %>" value="<%= choice_id %>"> <%= choice %> <%= choice_id %></label> <br>
+        <%
+                compare = questionsId;
+            } else {
+        %>
+                <label><input type="radio" name="<%= questionsId %>" value="<%= choice_id %>"> <%= choice %> <%= choice_id %></label> <br>
+        <%
+            }
+        }
+        %>
     </div>
 
     <div class="container bg-white fs-6 py-6 row mx-auto my-3">
         <div class="text-center d-flex justify-content-center py-2">
-            <button type="submit" formaction="" class=" btn btn-white mx-2 btn-outline-dark">닫기</button>
-            <button type="submit" formaction="" class="btn btn-white btn-outline-dark bg-info">설문 제출</button>
+            <button type="reset" class=" btn btn-white mx-2 btn-outline-dark">다시하기</button>
+            <button type="submit" class="btn btn-white btn-outline-dark bg-info">설문 제출</button>
         </div>
     </div>
     </form>

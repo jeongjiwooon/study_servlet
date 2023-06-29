@@ -44,4 +44,34 @@ public class PollsDao
         }
         return InforList;
     }
+
+    public int Insert(HashMap<String, Object> map){
+        int count = 0;
+        try {
+            Common common = new Common();
+            Statement statement = common.getStatement(); // Editor in Workbanch
+            String query = "insert into statistics\n" + //
+                    "(statistics_id, respondents_id, questions_id, choice_id)\n" + //
+                    "values\n";
+
+                int loops = 1;
+                String userId = "R1";
+                for (String key : map.keySet())
+                {
+                    String uuid = common.generateUUID();
+                    if (loops > 1)
+                    {
+                        query = query + ", ";
+                    }
+                    query = query + "('" + uuid + "', '" +userId + "', '" + key + "', '" + map.get(key) + "')\n";
+                    // System.out.println(key + " " + map.get(key));
+                    loops = loops + 1;
+                }
+            query = query + ";";
+            count = statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
 }

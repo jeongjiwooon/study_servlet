@@ -25,12 +25,13 @@ public class PollSurveyServlet extends HttpServlet
 
             PollsDao pollsDao = new PollsDao();
             ArrayList surveyList = pollsDao.SelectWithSearch(contents);
-            for (int i = 0; i < surveyList.size(); i = i + 3)
+            int third = 3;
+            for (int i = 0; i < surveyList.size(); i = i + third)
             {
                 HashMap survey = (HashMap) surveyList.get(i);
                 String questions = (String) survey.get("questions");
                 System.out.println(questions);
-                for (int c = 0; c < 3; c++)
+                for (int c = 0; c < third; c++)
                 {
                     HashMap survey2 = (HashMap) surveyList.get(c);
                     String choice = (String) survey2.get("choice");
